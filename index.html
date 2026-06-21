@@ -15,9 +15,29 @@
       --accent2: #a855f7;
       --accent3: #06b6d4;
       --text: #e2e8f0;
-      --muted: #94a3b8;
+      --muted: #cbd5e1;
       --border: rgba(124,58,237,0.2);
       --glow: rgba(124,58,237,0.15);
+      --sidebar-bg: rgba(10, 10, 15, 0.82);
+      --shadow: rgba(0, 0, 0, 0.25);
+      --surface-2: rgba(255, 255, 255, 0.04);
+    }
+
+    body[data-theme="light"] {
+      --bg: #f7f7fb;
+      --bg2: #eef2ff;
+      --card: #ffffff;
+      --card2: #f5f7ff;
+      --accent: #6d28d9;
+      --accent2: #8b5cf6;
+      --accent3: #0891b2;
+      --text: #111111;
+      --muted: #7a5a00;
+      --border: rgba(109, 40, 217, 0.12);
+      --glow: rgba(109, 40, 217, 0.08);
+      --sidebar-bg: rgba(255, 255, 255, 0.78);
+      --shadow: rgba(15, 23, 42, 0.08);
+      --surface-2: rgba(15, 23, 42, 0.04);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,6 +50,7 @@
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.35s ease, color 0.35s ease;
     }
 
     /* SCROLLBAR */
@@ -48,6 +69,10 @@
       transition: all 0.3s ease;
     }
 
+    body[data-theme="light"] nav {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
     .nav-logo {
       font-family: 'Inter', sans-serif;
       font-weight: 900;
@@ -58,6 +83,62 @@
       background-clip: text;
       letter-spacing: -0.03em;
       cursor: default;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-switch {
+      position: relative;
+      display: inline-block;
+      width: 56px;
+      height: 30px;
+    }
+
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      border-radius: 999px;
+      transition: 0.3s;
+    }
+
+    .slider::before {
+      content: '';
+      position: absolute;
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      top: 4px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    .theme-switch input:checked + .slider::before {
+      transform: translateX(26px);
+    }
+
+    .theme-icon {
+      font-size: 0.9rem;
+      color: var(--muted);
     }
 
     .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -166,9 +247,17 @@
       background-clip: text;
     }
 
+    body[data-theme="light"] .hero-name .gradient-text {
+      background: linear-gradient(135deg, #111111 0%, #111111 55%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .hero-role {
       font-size: clamp(1rem, 3vw, 1.4rem);
-      color: var(--muted);
+      color: var(--text);
+      opacity: 0.92;
       margin-bottom: 1.5rem;
       animation: fadeInUp 0.7s 0.2s ease both;
     }
@@ -178,9 +267,35 @@
       font-weight: 600;
     }
 
+    body[data-theme="light"] .hero-role,
+    body[data-theme="light"] .hero-desc,
+    body[data-theme="light"] .stat-label,
+    body[data-theme="light"] .about-info p,
+    body[data-theme="light"] .section-subtitle,
+    body[data-theme="light"] .timeline-desc,
+    body[data-theme="light"] .project-desc,
+    body[data-theme="light"] .contact-box p,
+    body[data-theme="light"] .modal-text,
+    body[data-theme="light"] .modal-detail,
+    body[data-theme="light"] .cert-info span,
+    body[data-theme="light"] .achievement-sub {
+      color: #111111;
+    }
+
+    body[data-theme="light"] .hero-desc,
+    body[data-theme="light"] .about-info p,
+    body[data-theme="light"] .timeline-desc,
+    body[data-theme="light"] .project-desc,
+    body[data-theme="light"] .modal-text,
+    body[data-theme="light"] .modal-detail,
+    body[data-theme="light"] .contact-box p {
+      opacity: 0.9;
+    }
+
     .hero-desc {
       font-size: 1.05rem;
-      color: var(--muted);
+      color: var(--text);
+      opacity: 0.88;
       max-width: 560px;
       margin: 0 auto 2.5rem;
       line-height: 1.8;
@@ -273,10 +388,18 @@
       color: #ffffff;
     }
 
+    body[data-theme="light"] .section-title {
+      color: #111111;
+    }
+
     .section-title .hl {
       color: var(--accent2);
       background: none;
       -webkit-text-fill-color: unset;
+    }
+
+    body[data-theme="light"] .section-title .hl {
+      color: #fbbf24;
     }
 
     .section-sub {
@@ -767,6 +890,15 @@
       font-weight: 900;
       margin-bottom: 1rem;
       letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    body[data-theme="light"] .contact-box h2 {
+      color: #111111;
+    }
+
+    body[data-theme="light"] .contact-box h2 span {
+      color: #fbbf24;
     }
 
     .contact-box p { color: var(--muted); margin-bottom: 2.5rem; line-height: 1.8; }
@@ -1037,31 +1169,23 @@
       .modal-banner { min-height: 140px; font-size: 3.5rem; }
     }
 
-    /* ======== CURSOR GLOW ======== */
+    /* ======== CURSOR ======== */
     #cursor-glow {
-      position: fixed;
-      width: 420px; height: 420px;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(168,85,247,0.13) 0%, rgba(124,58,237,0.07) 35%, transparent 70%);
-      will-change: left, top;
+      display: none;
     }
     #cursor-dot {
       position: fixed;
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       background: var(--accent2);
-      box-shadow: 0 0 10px var(--accent2), 0 0 22px var(--accent);
-      transition: width 0.18s, height 0.18s, background 0.18s;
+      box-shadow: none;
+      transition: none;
       will-change: left, top;
     }
-    /* ring removed */
-    .cursor-hover #cursor-dot { width: 14px; height: 14px; background: var(--accent3); box-shadow: 0 0 14px var(--accent3); }
 
     /* ======== 3D TILT — handled fully in JS ======== */
     .tilt-card { transform-style: preserve-3d; }
@@ -1242,16 +1366,26 @@
   <!-- NAV -->
   <nav id="navbar">
     <div class="nav-logo">SP</div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact" class="nav-cta">Hire Me</a></li>
-    </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
+    <div class="nav-controls">
+      <div class="theme-toggle">
+        <span class="theme-icon">☀</span>
+        <label class="theme-switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+        <span class="theme-icon">🌙</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </nav>
 
@@ -1433,85 +1567,6 @@
     <div class="modal" id="modalBox">
       <button class="modal-close" onclick="closeModal()">✕</button>
 
-      <!-- ANIMEX MODAL -->
-      <div id="modal-animex" class="modal-content-inner" style="display:none">
-        <div class="modal-banner" style="background: linear-gradient(135deg, #1a0a2e 0%, #0d1a2e 50%, #0a1520 100%);">
-          <span class="banner-emoji">🎬</span>
-        </div>
-        <div class="modal-body">
-          <div class="modal-type">Course Project · Web Development</div>
-          <h2 class="modal-title">Animex Web Application</h2>
-          <p class="modal-desc">
-            Animex is a full-featured movie and show streaming web platform built with Django. Users can browse a catalogue, search titles, and enjoy a seamless viewing experience. The project gave hands-on exposure to full-stack development — from database design and backend logic to responsive frontend UI — deployed with Gunicorn as the production server.
-          </p>
-
-          <div class="modal-section-title">✦ Key Features</div>
-          <ul class="modal-features">
-            <li>Browse & search movies and TV shows</li>
-            <li>User authentication & sessions</li>
-            <li>Django ORM-powered SQL database</li>
-            <li>Responsive UI with HTML, CSS & JS</li>
-            <li>Media management with Pillow library</li>
-            <li>Production deployment via Gunicorn</li>
-          </ul>
-
-          <div class="modal-section-title">✦ Tech Stack</div>
-          <div class="modal-tech">
-            <span class="modal-tech-tag">Python</span>
-            <span class="modal-tech-tag">Django</span>
-            <span class="modal-tech-tag">HTML / CSS</span>
-            <span class="modal-tech-tag">JavaScript</span>
-            <span class="modal-tech-tag">SQL</span>
-            <span class="modal-tech-tag">Gunicorn</span>
-            <span class="modal-tech-tag">Pillow</span>
-          </div>
-
-          <div class="modal-actions">
-            <a href="https://github.com/" target="_blank" class="modal-btn-primary">⬡ View on GitHub</a>
-            <button onclick="closeModal()" class="modal-btn-secondary">← Back</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- FACE RECOGNITION MODAL -->
-      <div id="modal-face" class="modal-content-inner" style="display:none">
-        <div class="modal-banner" style="background: linear-gradient(135deg, #0a1a0a 0%, #0d1a1a 50%, #0a0f1a 100%);">
-          <span class="banner-emoji">👁️</span>
-        </div>
-        <div class="modal-body">
-          <div class="modal-type">Personal Project · Computer Vision</div>
-          <h2 class="modal-title">Attendance System with Face Recognition</h2>
-          <p class="modal-desc">
-            A smart, contactless attendance management system powered by real-time face recognition. Using OpenCV and the FaceRecognition library, the system identifies registered users through a webcam feed, instantly logs their attendance, and presents the data through an interactive Tkinter desktop GUI — eliminating manual roll calls entirely.
-          </p>
-
-          <div class="modal-section-title">✦ Key Features</div>
-          <ul class="modal-features">
-            <li>Real-time face detection & recognition</li>
-            <li>Contactless — no physical interaction</li>
-            <li>Auto attendance logging with timestamps</li>
-            <li>Desktop GUI built with Tkinter</li>
-            <li>Pandas-powered data export (CSV/Excel)</li>
-            <li>Multi-face simultaneous detection</li>
-          </ul>
-
-          <div class="modal-section-title">✦ Tech Stack</div>
-          <div class="modal-tech">
-            <span class="modal-tech-tag">Python</span>
-            <span class="modal-tech-tag">OpenCV</span>
-            <span class="modal-tech-tag">FaceRecognition</span>
-            <span class="modal-tech-tag">Tkinter</span>
-            <span class="modal-tech-tag">NumPy</span>
-            <span class="modal-tech-tag">Pandas</span>
-          </div>
-
-          <div class="modal-actions">
-            <a href="https://github.com/" target="_blank" class="modal-btn-primary">⬡ View on GitHub</a>
-            <button onclick="closeModal()" class="modal-btn-secondary">← Back</button>
-          </div>
-        </div>
-      </div>
-
       <!-- MOVIE RECOMMENDER MODAL -->
       <div id="modal-recommender" class="modal-content-inner" style="display:none">
         <div class="modal-banner" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0d1520 100%);">
@@ -1565,6 +1620,167 @@
         </div>
       </div>
 
+      <!-- VC-DIMENSION SENTIMENT MODAL -->
+      <div id="modal-vc-sentiment" class="modal-content-inner" style="display:none">
+        <div class="modal-banner" style="background: linear-gradient(135deg, #111827 0%, #1e1b4b 50%, #0f172a 100%);">
+          <span class="banner-emoji">🧠</span>
+        </div>
+        <div class="modal-body">
+          <div class="modal-type">Academic Research Project · Machine Learning</div>
+          <h2 class="modal-title">VC-Dimension Aware Sentiment Analysis</h2>
+          <p class="modal-desc">
+            A machine learning-based sentiment analysis system that investigates the relationship between model complexity and generalization using VC Dimension theory. The project evaluates Logistic Regression, SVM, and Decision Tree classifiers on IMDB and Twitter datasets, using TF-IDF feature space size as a practical proxy for complexity. An interactive Streamlit application enables real-time sentiment prediction and visualization of model behavior.
+          </p>
+
+          <div class="modal-section-title">✦ Key Features</div>
+          <ul class="modal-features">
+            <li>VC-dimension inspired complexity analysis using TF-IDF vocabulary size</li>
+            <li>Comparative evaluation of Logistic Regression, SVM, and Decision Tree</li>
+            <li>Sentiment classification for positive, negative, and neutral text</li>
+            <li>Multi-dataset experimentation on IMDB and Twitter reviews</li>
+            <li>Interactive Streamlit dashboard for prediction and comparison</li>
+            <li>Text preprocessing, normalization, and feature extraction pipeline</li>
+            <li>Visualization of accuracy trends and overfitting behavior</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Results</div>
+          <ul class="modal-features">
+            <li>IMDB: Logistic Regression 90.03%, SVM 89.83%, Decision Tree 70.40%</li>
+            <li>Twitter: Logistic Regression 84.14%, SVM 85.36%, Decision Tree 48.61%</li>
+            <li>Logistic Regression showed stable generalization across feature dimensions</li>
+            <li>Moderate TF-IDF vocabulary sizes balanced accuracy and overfitting</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Tech Stack</div>
+          <div class="modal-tech">
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">Scikit-learn</span>
+            <span class="modal-tech-tag">Streamlit</span>
+            <span class="modal-tech-tag">Hugging Face Datasets</span>
+            <span class="modal-tech-tag">TF-IDF</span>
+            <span class="modal-tech-tag">Pandas</span>
+            <span class="modal-tech-tag">NumPy</span>
+            <span class="modal-tech-tag">Matplotlib</span>
+            <span class="modal-tech-tag">Seaborn</span>
+          </div>
+
+          <div class="modal-actions">
+            <a href="https://github.com/SatyamPal99/Sentiment-Analysis-using-VC_dimension" target="_blank" class="modal-btn-primary">⬡ View on GitHub</a>
+            <button onclick="closeModal()" class="modal-btn-secondary">← Back</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER CHURN ANN MODAL -->
+      <div id="modal-churn-ann" class="modal-content-inner" style="display:none">
+        <div class="modal-banner" style="background: linear-gradient(135deg, #0f172a 0%, #0b1120 50%, #111827 100%);">
+          <span class="banner-emoji">🏦</span>
+        </div>
+        <div class="modal-body">
+          <div class="modal-type">Deep Learning Project · Predictive Analytics</div>
+          <h2 class="modal-title">Customer Churn Prediction Using Artificial Neural Networks</h2>
+          <p class="modal-desc">
+            A deep learning-based customer churn prediction system designed to identify bank customers likely to discontinue services. The project uses demographic, financial, and account-related attributes to train an ANN that predicts attrition and helps financial institutions implement targeted retention strategies.
+          </p>
+
+          <div class="modal-section-title">✦ Key Features</div>
+          <ul class="modal-features">
+            <li>End-to-end churn prediction pipeline using Artificial Neural Networks</li>
+            <li>Automated preprocessing including encoding, scaling, and train-test split</li>
+            <li>One-Hot Encoding for categorical customer attributes</li>
+            <li>StandardScaler-based feature normalization for stable convergence</li>
+            <li>Multi-layer ANN with ReLU and Sigmoid activations</li>
+            <li>Binary classification for churn risk prediction</li>
+            <li>Evaluation using Accuracy, Confusion Matrix, and ROC-AUC</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Model Architecture</div>
+          <ul class="modal-features">
+            <li>Input Layer: 11 Features</li>
+            <li>Hidden Layer 1: 16 Neurons (ReLU)</li>
+            <li>Hidden Layer 2: 8 Neurons (ReLU)</li>
+            <li>Output Layer: 1 Neuron (Sigmoid)</li>
+            <li>Optimizer: Adam</li>
+            <li>Loss: Binary Crossentropy</li>
+            <li>Epochs: 100 · Batch Size: 32</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Results</div>
+          <ul class="modal-features">
+            <li>Accuracy: 86–88%</li>
+            <li>ROC-AUC Score: 0.87</li>
+            <li>Strong generalization on unseen customer data</li>
+            <li>Effective identification of high-risk churn customers</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Tech Stack</div>
+          <div class="modal-tech">
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">TensorFlow</span>
+            <span class="modal-tech-tag">Keras</span>
+            <span class="modal-tech-tag">Scikit-learn</span>
+            <span class="modal-tech-tag">Pandas</span>
+            <span class="modal-tech-tag">NumPy</span>
+            <span class="modal-tech-tag">Matplotlib</span>
+          </div>
+
+          <div class="modal-actions">
+            <a href="https://github.com/SatyamPal99/Customer_churn_prediction_using_ANN" target="_blank" class="modal-btn-primary">⬡ View on GitHub</a>
+            <button onclick="closeModal()" class="modal-btn-secondary">← Back</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PORTFOLIO WEBSITE MODAL -->
+      <div id="modal-portfolio-site" class="modal-content-inner" style="display:none">
+        <div class="modal-banner" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0d1324 100%);">
+          <span class="banner-emoji">🌐</span>
+        </div>
+        <div class="modal-body">
+          <div class="modal-type">Personal Portfolio · Web Development</div>
+          <h2 class="modal-title">AI Engineer Portfolio Website</h2>
+          <p class="modal-desc">
+            A modern, responsive portfolio website designed to showcase technical expertise, academic achievements, professional experience, and AI/ML projects through an interactive user experience. The platform combines futuristic UI design, custom animations, dynamic project modals, and responsive layouts to create a professional digital presence for recruiters and industry professionals.
+          </p>
+
+          <div class="modal-section-title">✦ Key Features</div>
+          <ul class="modal-features">
+            <li>Fully responsive single-page portfolio design</li>
+            <li>Interactive project showcase with detailed modal windows</li>
+            <li>Professional sections for skills, experience, education, and achievements</li>
+            <li>Custom animated cursor and particle background effects</li>
+            <li>Smooth scrolling navigation with progress indicator</li>
+            <li>Typewriter animation for dynamic role presentation</li>
+            <li>Mobile-friendly navigation and adaptive layouts</li>
+            <li>Direct integration of GitHub and professional profile links</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Highlights</div>
+          <ul class="modal-features">
+            <li>Showcases AI, ML, and software engineering projects</li>
+            <li>Professional presentation of academic and industry experience</li>
+            <li>Optimized user experience with modern frontend design principles</li>
+            <li>Recruiter-friendly structure for quick skill assessment</li>
+          </ul>
+
+          <div class="modal-section-title">✦ Tech Stack</div>
+          <div class="modal-tech">
+            <span class="modal-tech-tag">HTML5</span>
+            <span class="modal-tech-tag">CSS3</span>
+            <span class="modal-tech-tag">JavaScript</span>
+            <span class="modal-tech-tag">Flexbox</span>
+            <span class="modal-tech-tag">CSS Grid</span>
+            <span class="modal-tech-tag">Responsive Design</span>
+            <span class="modal-tech-tag">Custom Animations</span>
+          </div>
+
+          <div class="modal-actions">
+            <a href="https://github.com/SatyamPal99/My-Portfolio" target="_blank" class="modal-btn-primary">⬡ View on GitHub</a>
+            <button onclick="closeModal()" class="modal-btn-secondary">← Back</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <section id="projects">
@@ -1601,49 +1817,77 @@
           </div>
         </div>
 
-        <div class="project-card reveal" onclick="openModal('animex')">
+        <div class="project-card reveal" onclick="openModal('vc-sentiment')">
           <div class="project-header">
-            <div class="project-icon">🎬</div>
+            <div class="project-icon">🧠</div>
             <div class="project-links">
-              <a href="https://github.com/" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
+              <a href="https://github.com/SatyamPal99/Sentiment-Analysis-using-VC_dimension" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
           </div>
           <div class="project-body">
-            <div class="project-type">Course Project</div>
-            <h3 class="project-title">Animex Web Application</h3>
+            <div class="project-type">Academic Research · Machine Learning</div>
+            <h3 class="project-title">VC-Dimension Aware Sentiment Analysis</h3>
             <p class="project-desc">
-              A full-featured streaming platform where users can discover, browse, and watch movies and shows. Built with Django for a seamless movie-watching experience.
+              A sentiment analysis project studying how model complexity affects generalization using VC Dimension concepts, evaluated across IMDB and Twitter datasets.
             </p>
             <div class="project-tech">
-              <span class="tech-tag">Django</span>
-              <span class="tech-tag">HTML/CSS</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">SQL</span>
-              <span class="tech-tag">Gunicorn</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">TF-IDF</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Matplotlib</span>
             </div>
             <div class="open-modal-hint">✦ Click to explore project →</div>
           </div>
         </div>
 
-        <div class="project-card reveal" onclick="openModal('face')">
+        <div class="project-card reveal" onclick="openModal('churn-ann')">
           <div class="project-header">
-            <div class="project-icon">👁️</div>
+            <div class="project-icon">🏦</div>
             <div class="project-links">
-              <a href="https://github.com/" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
+              <a href="https://github.com/SatyamPal99/Customer_churn_prediction_using_ANN" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
           </div>
           <div class="project-body">
-            <div class="project-type">Personal Project</div>
-            <h3 class="project-title">Attendance System with Face Recognition</h3>
+            <div class="project-type">Deep Learning · Predictive Analytics</div>
+            <h3 class="project-title">Customer Churn Prediction Using Artificial Neural Networks</h3>
             <p class="project-desc">
-              A contactless attendance system using real-time face recognition. Supports instant identification, auto-logging, and a desktop GUI.
+              A customer retention model that predicts churn using ANN-based analysis of demographic, financial, and account-related attributes.
             </p>
             <div class="project-tech">
-              <span class="tech-tag">OpenCV</span>
-              <span class="tech-tag">FaceRecognition</span>
-              <span class="tech-tag">Tkinter</span>
-              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">Keras</span>
+              <span class="tech-tag">Scikit-learn</span>
               <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Matplotlib</span>
+            </div>
+            <div class="open-modal-hint">✦ Click to explore project →</div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" onclick="openModal('portfolio-site')">
+          <div class="project-header">
+            <div class="project-icon" style="overflow:hidden; padding:0;">
+              <img src="portfolio.png" alt="Portfolio preview" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/SatyamPal99/My-Portfolio" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-type">Personal Portfolio · Web Development</div>
+            <h3 class="project-title">AI Engineer Portfolio Website</h3>
+            <p class="project-desc">
+              A modern responsive portfolio that highlights projects, skills, and experience through an interactive UI and visual storytelling.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Responsive Design</span>
+              <span class="tech-tag">Animations</span>
             </div>
             <div class="open-modal-hint">✦ Click to explore project →</div>
           </div>
@@ -1856,6 +2100,17 @@
       link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
 
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.dataset.theme = savedTheme;
+    themeToggle.checked = savedTheme === 'light';
+    themeToggle.addEventListener('change', () => {
+      const isLight = themeToggle.checked;
+      document.body.dataset.theme = isLight ? 'light' : 'dark';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
     // ===== SCROLL REVEAL =====
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1884,28 +2139,23 @@
         if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
       });
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.style.color = link.getAttribute('href') === '#' + current ? '#a855f7' : '';
+        const isActive = link.getAttribute('href') === '#' + current;
+        link.classList.toggle('active', isActive);
+        if (link.closest('.nav-links')) {
+          link.style.color = isActive ? '#a855f7' : '';
+        }
       });
     });
 
     // ===== CUSTOM CURSOR =====
-    const glow = document.getElementById('cursor-glow');
-    const dot  = document.getElementById('cursor-dot');
+    const dot = document.getElementById('cursor-dot');
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
 
     document.addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left  = mx + 'px';
-      dot.style.top   = my + 'px';
-      glow.style.left = mx + 'px';
-      glow.style.top  = my + 'px';
-    });
-
-    // Cursor state on interactive elements
-    const interactiveEls = 'a, button, .project-card, .skill-card, .cert-item, .achievement-card, .timeline-content, .chip, .nav-cta';
-    document.querySelectorAll(interactiveEls).forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
     });
 
     // ===== CARD TILT ONLY =====
