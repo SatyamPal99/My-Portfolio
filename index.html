@@ -259,7 +259,22 @@
       color: var(--text);
       opacity: 0.92;
       margin-bottom: 1.5rem;
+      min-height: 1.8em;
       animation: fadeInUp 0.7s 0.2s ease both;
+    }
+
+    .keyword {
+      color: var(--accent2);
+      font-weight: 700;
+    }
+
+    .about-tagline {
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
     }
 
     .hero-role span {
@@ -661,32 +676,57 @@
       box-shadow: 0 20px 60px rgba(124,58,237,0.15);
     }
 
-    .project-header {
-      padding: 2rem 2rem 0;
-      display: flex; justify-content: space-between; align-items: flex-start;
-    }
-
-    .project-icon {
-      width: 56px; height: 56px;
-      border-radius: 14px;
+    .project-banner {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
       background: linear-gradient(135deg, var(--accent), var(--accent3));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
     }
 
-    .project-links { display: flex; gap: 0.5rem; }
+    .project-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-banner img {
+      transform: scale(1.05);
+    }
+
+    .project-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,15,0) 55%, rgba(10,10,15,0.55) 100%);
+      pointer-events: none;
+    }
+
+    .banner-fallback {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.2rem;
+    }
+
+    .project-links {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      display: flex; gap: 0.5rem;
+      z-index: 2;
+    }
     .project-link {
       width: 36px; height: 36px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10,10,15,0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.16);
       display: flex; align-items: center; justify-content: center;
       text-decoration: none;
       font-size: 0.9rem;
-      color: var(--muted);
+      color: #fff;
       transition: all 0.3s;
     }
-    .project-link:hover { background: var(--glow); color: var(--accent2); border-color: var(--border); }
+    .project-link:hover { background: rgba(124,58,237,0.75); border-color: rgba(255,255,255,0.3); }
 
     .project-body { padding: 1.5rem 2rem 2rem; }
 
@@ -1151,17 +1191,21 @@
     /* Make project card clickable */
     .project-card { cursor: pointer; }
     .project-card .open-modal-hint {
-      display: flex; align-items: center; gap: 0.4rem;
-      margin-top: 1rem;
-      font-size: 0.82rem;
-      color: var(--accent2);
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%;
+      margin-top: 1.3rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #ffffff;
+      font-size: 0.85rem;
       font-weight: 600;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: all 0.3s;
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .project-card:hover .open-modal-hint {
-      opacity: 1; transform: translateY(0);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(124,58,237,0.5);
     }
 
     @media (max-width: 600px) {
@@ -1402,15 +1446,14 @@
         <span class="gradient-text">Satyam Pal</span>
       </h1>
       <p class="hero-role">
-        AI Engineer &amp; <span id="typewriter-text">Full Stack Developer</span><span class="typewriter-cursor"></span>
+        AI Engineer &amp; <span id="typewriter-text">Machine Learning Engineer</span><span class="typewriter-cursor"></span>
       </p>
       <p class="hero-desc">
-        Passionate about building intelligent systems and elegant web experiences.
-        Exploring the intersection of AI, computer vision, and software engineering.
+        Building <span class="keyword">AI-powered applications</span>, recommendation systems, and scalable software using <span class="keyword">Machine Learning</span>, <span class="keyword">Deep Learning</span>, <span class="keyword">NLP</span>, and modern web technologies.
       </p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects →</a>
-        <a href="#contact" class="btn-secondary">Get in Touch</a>
+        <a href="resume.pdf" target="_blank" class="btn-secondary">↓ Download Resume</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -1446,8 +1489,10 @@
         <div class="about-info reveal">
           <div class="section-label">✦ About Me</div>
           <h2 class="section-title">Crafting Intelligent<br><span class="hl">Digital Experiences</span></h2>
-          <p>Hi, I'm <strong>Satyam Pal</strong> — an MTech AI student at <strong>IIT Jodhpur</strong>, with a strong background in Computer Science Engineering from PSIT Kanpur. I love building things that blend intelligence with intuitive design.</p>
-          <p>With hands-on experience at <strong>Ericsson Global</strong> as an intern and a GATE AIR of <strong>4388</strong>, I'm driven by solving real-world problems through code — from face recognition systems to full-stack web apps.</p>
+          <div class="about-tagline">AI Engineer • Software Developer • Problem Solver</div>
+          <p>I'm <strong>Satyam Pal</strong>, pursuing an <strong>M.Tech in Artificial Intelligence</strong> at <strong>IIT Jodhpur</strong>. I specialize in developing intelligent software using <span class="keyword">Machine Learning</span>, <span class="keyword">Deep Learning</span>, <span class="keyword">NLP</span>, and scalable backend technologies.</p>
+          <p>I enjoy transforming complex ideas into practical products — from AI-powered recommendation systems and intelligent platforms to distributed applications and full-stack web solutions. My goal is to build software that is not only technically robust but also delivers meaningful value to users.</p>
+          <p>Beyond academics, I'm continuously sharpening my problem-solving skills through <span class="keyword">Data Structures & Algorithms</span>, <span class="keyword">system design</span>, and hands-on projects.</p>
           <div class="about-chips">
             <span class="chip">🤖 Machine Learning</span>
             <span class="chip">👁️ Computer Vision</span>
@@ -1793,8 +1838,9 @@
       <div class="projects-grid">
 
         <div class="project-card reveal" onclick="openModal('recommender')">
-          <div class="project-header">
-            <div class="project-icon">🎯</div>
+          <div class="project-banner" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 60%, #0d1520 100%);">
+            <img src="movie-recommender.webp" alt="Context Aware Movie Recommender preview" style="object-fit: contain; padding: 0.75rem;"
+                 onerror="this.remove(); this.parentElement.insertAdjacentHTML('afterbegin','&lt;div class=&quot;banner-fallback&quot;&gt;🎯&lt;/div&gt;')" />
             <div class="project-links">
               <a href="https://github.com/SatyamPal99/context-aware-movie-recommender" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
@@ -1813,13 +1859,14 @@
               <span class="tech-tag">ALS</span>
               <span class="tech-tag">TF-IDF</span>
             </div>
-            <div class="open-modal-hint">✦ Click to explore project →</div>
+            <div class="open-modal-hint">⬡ Click for more details</div>
           </div>
         </div>
 
         <div class="project-card reveal" onclick="openModal('vc-sentiment')">
-          <div class="project-header">
-            <div class="project-icon">🧠</div>
+          <div class="project-banner" style="background: linear-gradient(135deg, #111827 0%, #1e1b4b 50%, #0f172a 100%);">
+            <img src="sentiment-analysis.png" alt="VC-Dimension Aware Sentiment Analysis preview" style="object-fit: contain; padding: 1.2rem;"
+                 onerror="this.remove(); this.parentElement.insertAdjacentHTML('afterbegin','&lt;div class=&quot;banner-fallback&quot;&gt;🧠&lt;/div&gt;')" />
             <div class="project-links">
               <a href="https://github.com/SatyamPal99/Sentiment-Analysis-using-VC_dimension" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
@@ -1838,13 +1885,14 @@
               <span class="tech-tag">Pandas</span>
               <span class="tech-tag">Matplotlib</span>
             </div>
-            <div class="open-modal-hint">✦ Click to explore project →</div>
+            <div class="open-modal-hint">⬡ Click for more details</div>
           </div>
         </div>
 
         <div class="project-card reveal" onclick="openModal('churn-ann')">
-          <div class="project-header">
-            <div class="project-icon">🏦</div>
+          <div class="project-banner" style="background: linear-gradient(135deg, #0f172a 0%, #0b1120 50%, #111827 100%);">
+            <img src="churn-prediction.png" alt="Customer Churn Prediction preview" style="object-fit: contain; padding: 1.8rem;"
+                 onerror="this.remove(); this.parentElement.insertAdjacentHTML('afterbegin','&lt;div class=&quot;banner-fallback&quot;&gt;🏦&lt;/div&gt;')" />
             <div class="project-links">
               <a href="https://github.com/SatyamPal99/Customer_churn_prediction_using_ANN" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
@@ -1863,15 +1911,14 @@
               <span class="tech-tag">Pandas</span>
               <span class="tech-tag">Matplotlib</span>
             </div>
-            <div class="open-modal-hint">✦ Click to explore project →</div>
+            <div class="open-modal-hint">⬡ Click for more details</div>
           </div>
         </div>
 
         <div class="project-card reveal" onclick="openModal('portfolio-site')">
-          <div class="project-header">
-            <div class="project-icon" style="overflow:hidden; padding:0;">
-              <img src="portfolio.png" alt="Portfolio preview" style="width:100%; height:100%; object-fit:cover; display:block;" />
-            </div>
+          <div class="project-banner" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0d1324 100%);">
+            <img src="portfolio.png" alt="Portfolio preview" style="object-fit: contain; padding: 1.2rem;"
+                 onerror="this.remove(); this.parentElement.insertAdjacentHTML('afterbegin','&lt;div class=&quot;banner-fallback&quot;&gt;🌐&lt;/div&gt;')" />
             <div class="project-links">
               <a href="https://github.com/SatyamPal99/My-Portfolio" target="_blank" class="project-link" title="GitHub" onclick="event.stopPropagation()">⬡</a>
             </div>
@@ -1889,7 +1936,7 @@
               <span class="tech-tag">Responsive Design</span>
               <span class="tech-tag">Animations</span>
             </div>
-            <div class="open-modal-hint">✦ Click to explore project →</div>
+            <div class="open-modal-hint">⬡ Click for more details</div>
           </div>
         </div>
 
@@ -2263,7 +2310,7 @@
     (function() {
       const el = document.getElementById('typewriter-text');
       if (!el) return;
-      const words = ['Full Stack Developer', 'ML Enthusiast', 'Problem Solver', 'AI Engineer', 'Open Source Builder'];
+      const words = ['Machine Learning Engineer', 'Software Developer', 'Open Source Contributor', 'Full Stack Developer', 'Problem Solver'];
       let wi = 0, ci = 0, deleting = false;
 
       function type() {
